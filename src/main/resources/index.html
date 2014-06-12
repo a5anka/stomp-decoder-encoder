@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+
+<script src="stomp.min.js"></script>
+<script>
+
+    var url = "ws://localhost:5775/stomp"
+
+    var connect_callback = function() {
+    // called back after the client is connected and authenticated to the STOMP server
+    console.log("Connection complete");
+  };
+
+  var error_callback = function(error) {
+    // display the error's message header:
+    alert(error.headers.message);
+  };
+</script>
+</body>
+</html>
