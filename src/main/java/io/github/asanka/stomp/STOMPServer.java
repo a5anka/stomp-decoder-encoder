@@ -11,7 +11,7 @@ import io.netty.handler.logging.LoggingHandler;
 public class STOMPServer {
     static final int PORT = 5775;
 
-    public static void main(String[] args) {
+    public void main() {
 
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
         EventLoopGroup workerGroup = new NioEventLoopGroup();

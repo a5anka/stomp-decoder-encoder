@@ -4,5 +4,7 @@ import java.util.Map;
 
 public interface STOMPFrame {
 
-    public String toProtocolString();
+    public STOMPCommandType getType();
+    public Map<String,String> getHeaders();
+    public String getContent();
 }

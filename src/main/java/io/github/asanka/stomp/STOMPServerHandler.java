@@ -8,12 +8,11 @@ import io.netty.util.CharsetUtil;
 
 import java.util.logging.Logger;
 
-public class STOMPServerHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
+public class STOMPServerHandler extends SimpleChannelInboundHandler<STOMPFrame> {
     private final static Logger LOGGER = Logger.getLogger(STOMPServerHandler.class.getName());
 
     @Override
-    protected void channelRead0(ChannelHandlerContext channelHandlerContext, TextWebSocketFrame textWebSocketFrame) throws Exception {
-        LOGGER.info(textWebSocketFrame.text());
-        channelHandlerContext.channel().writeAndFlush(new TextWebSocketFrame("CONNECTED\nversion:1.1\nheart-beat:0,0\n\n\0"));
+    protected void channelRead0(ChannelHandlerContext channelHandlerContext, STOMPFrame stompFrame) throws Exception {
+
     }
 }

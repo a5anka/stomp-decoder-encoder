@@ -1,6 +1,9 @@
 package io.github.asanka.stomp;
 
-public class STOMPConnectFrame implements STOMPFrame {
+import java.util.HashMap;
+import java.util.Map;
+
+public class STOMPConnectFrame implements STOMPFrame{
 
     String versions;
     String host;
@@ -19,10 +22,23 @@ public class STOMPConnectFrame implements STOMPFrame {
     }
 
     @Override
-    public String toProtocolString() {
-        return "CONNECT\n"
-                + "version:" + this.versions
-                + (this.host == null ? "" : "\nhost:" + this.host)
-                + "\n\n\0";
+    public STOMPCommandType getType() {
+        return STOMPCommandType.CONNECT;
+    }
+
+    @Override
+    public Map<String, String> getHeaders() {
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("accept-version", this.versions);
+        if (this.host != null) {
+            headers.put("host", this.host);
+        }
+
+        return headers;
+    }
+
+    @Override
+    public String getContent() {
+        return null;
     }
 }
