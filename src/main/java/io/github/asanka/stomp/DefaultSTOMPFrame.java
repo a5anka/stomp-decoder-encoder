@@ -12,9 +12,13 @@ public class DefaultSTOMPFrame implements STOMPFrame {
     String stomBody;
 
     public DefaultSTOMPFrame(STOMPCommandType type, Map<String, String> headers, String stompBody) {
+        this(type, headers);
+        this.stomBody = stompBody;
+    }
+
+    public DefaultSTOMPFrame(STOMPCommandType type, Map<String, String> headers) {
         this.type = type;
         this.headers = headers;
-        this.stomBody = stompBody;
     }
 
     @Override

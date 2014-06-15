@@ -2,6 +2,8 @@ package io.github.asanka.stomp;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToMessageEncoder;
+import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
+import io.netty.handler.codec.http.websocketx.WebSocketFrame;
 
 import java.util.List;
 import java.util.Map;
@@ -33,6 +35,19 @@ public class STOMPEncoder extends MessageToMessageEncoder<STOMPFrame> {
         }
 
         builder.append("\0");
+
+        String stompFrameString = builder.toString();
+
+        WebSocketFrame result = new TextWebSocketFrame(stompFrameString);
+
+        objects.add(result);
+    }
+
+    private String escaapeFrameString(String stompFrameString) {
+        return stompFrameString.replace("\n", "\\n")
+                .replace(":", "\\c")
+                .replace("\\","\\\\");
+
     }
 
     private String getStringFor(STOMPCommandType type) {

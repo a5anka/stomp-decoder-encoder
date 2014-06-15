@@ -19,6 +19,8 @@ public class STOMPServerInitializer extends ChannelInitializer<SocketChannel> {
         pipeline.addLast(new HttpServerCodec());
         pipeline.addLast(new HttpObjectAggregator(MAX_HTTP_CONTENT_LENGTH));
         pipeline.addLast(new WebSocketServerProtocolHandler("/stomp", "v11.stomp, v10.stomp"));
+        pipeline.addLast(new STOMPDecoder());
+        pipeline.addLast(new STOMPEncoder());
         pipeline.addLast(new STOMPServerHandler());
     }
 }

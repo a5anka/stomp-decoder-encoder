@@ -65,8 +65,12 @@ public class STOMPDecoder extends MessageToMessageDecoder<TextWebSocketFrame>{
     }
 
     private String escapeContent(String rawContent) {
-        return rawContent.replace("\\n", "\n")
+        String escaped = rawContent.replace("\\n", "\n")
                 .replace("\\c", ":")
                 .replace("\\\\","\\");
+
+        int frameEnd = escaped.indexOf("\0");
+
+        return escaped.substring(0, frameEnd);
     }
 }
